@@ -1,1 +1,65 @@
-<p>create-car works!</p>
+<h6>Create a car</h6>
+<div class="row">
+    <div class="col-md-6">
+        <form #f="ngForm">
+            <div class="form-group">
+                <label for="make">Make</label>
+                <select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="car.makeId" name="makeId" required #make="ngModel">
+                    <option value=""></option>
+                    <option *ngFor="let m of makes" value="{{m.id}}">{{m.name}}</option>
+                </select>
+                <div  class="alert alert-danger" *ngIf ="make.touched && !make.valid">Please specify the make.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="model">Model</label>
+                <select id="model" class="form-control" [(ngModel)]="car.modelId" name="modelId" required #model="ngModel">
+                    <option value=""></option>
+                    <option *ngFor="let m of models" value="{{m.id}}">{{m.name}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="model.touched && !model.valid">Please specify the model</div>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input id="year" type="text" class="form-control" [(ngModel)]="car.year" name="year" required #year ="ngModel"/>
+                <div class="alert alert-danger" *ngIf ="year.touched && !year.valid">Please enter the year</div>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input id="price" type="text" class="form-control" [(ngModel)]="car.price" name="price" required #price="ngModel" />
+                <div class="alert alert-danger" *ngIf="price.touched && !price.valid">Please enter the price</div>
+            </div>
+
+            <div class="form-group">
+                <label for="transmissionType">Transmission type</label>
+                <select id="transmissionType" class="form-control" [(ngModel)]="car.transmissionTypeId" name="transmissionTypeId" required #transmissionType="ngModel">
+                    <option value=""></option>
+                    <option *ngFor="let t of transmissionTypes" value="{{t.id}}">{{t.name}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="transmissionType.touched && !transmissionType.valid">Please specify the transmission type</div>
+            </div>
+
+            <div class="form-group">
+                <label for="engineSize">Engine size</label>
+                <input id="engineSize" type="text" class="form-control" [(ngModel)]="car.engineSize" name="engineSize" required #engineSize ="ngModel"/>
+                <div class="alert alert-danger" *ngIf ="engineSize.touched && !engineSize.valid">Please enter the engine size</div>
+            </div>
+
+            <div class="form-group">
+                <label for="noOfSeats">No of seats</label>
+                <input id="noOfSeats" type="text" class="form-control" [(ngModel)]="car.noOfSeats" name="noOfSeats" required #noOfSeats="ngModel" />
+                <div class="alert alert-danger" *ngIf="car.noOfSeats.touched && !car.noOfSeats.valid">Please enter the no of seats</div>
+            </div>
+
+           <div class="form-group">
+                <label for="noOfDoors">No of doors</label>
+                <input id="noOfDoors" type="text" class="form-control" [(ngModel)]="car.noOfDoors" name="noOfDoors" required #noOfDoors="ngModel" />
+                <div class="alert alert-danger" *ngIf="noOfDoors.touched && !noOfDoors.valid">Please enter no of doors</div>
+            </div> 
+
+            <button class="btn btn-primary" [disabled]="!f.valid" >Save</button>
+        </form>
+    </div>
+</div>
