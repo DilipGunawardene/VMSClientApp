@@ -1,3 +1,4 @@
+import { VehicleService } from './services/vehicle.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
@@ -9,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CarsComponent } from './cars/cars.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CreateCarComponent } from './cars/create-car/create-car.component';
-
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,13 +24,14 @@ import { CreateCarComponent } from './cars/create-car/create-car.component';
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'cars', component: CarsComponent},
       {path: 'cars/create', component: CreateCarComponent}
     ])
   ],
-  providers: [],
+  providers: [VehicleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

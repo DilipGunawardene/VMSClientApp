@@ -1,3 +1,4 @@
+import { VehicleService } from './../../services/vehicle.service';
 import { Car } from './../../models/car';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,6 +13,8 @@ export class CreateCarComponent implements OnInit {
   models: any[];
   transmissionTypes: any[];
 
+  private results;
+
   car : Car = {
     id:0,
     makeId:0,
@@ -24,13 +27,23 @@ export class CreateCarComponent implements OnInit {
     engineSize:0
   }
 
-  constructor() { }
+  constructor(private vehicleSevice: VehicleService) { }
 
   ngOnInit() {
+    this.vehicleSevice.getMakes().then(a=> {
+      this.results= a;
+      this.makes = this.results;
+    })
   }
 
   onMakeChange(){
-    console.log("make changes");
+    this.populateModels();
+  }
+
+  
+  private populateModels() {
+    var selectedMake = this.makes.find(m => m.makeId == this.car.makeId);
+    this.models = selectedMake ? selectedMake.models : [];
   }
 
 }

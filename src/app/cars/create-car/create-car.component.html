@@ -6,7 +6,7 @@
                 <label for="make">Make</label>
                 <select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="car.makeId" name="makeId" required #make="ngModel">
                     <option value=""></option>
-                    <option *ngFor="let m of makes" value="{{m.id}}">{{m.name}}</option>
+                    <option *ngFor="let m of makes" value="{{m.makeId}}">{{m.makeName}}</option>
                 </select>
                 <div  class="alert alert-danger" *ngIf ="make.touched && !make.valid">Please specify the make.</div>
             </div>
@@ -15,7 +15,7 @@
                 <label for="model">Model</label>
                 <select id="model" class="form-control" [(ngModel)]="car.modelId" name="modelId" required #model="ngModel">
                     <option value=""></option>
-                    <option *ngFor="let m of models" value="{{m.id}}">{{m.name}}</option>
+                    <option *ngFor="let m of models" value="{{m.modelId}}">{{m.modelName}}</option>
                 </select>
                 <div class="alert alert-danger" *ngIf="model.touched && !model.valid">Please specify the model</div>
             </div>
