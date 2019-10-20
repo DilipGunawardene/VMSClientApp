@@ -1,3 +1,4 @@
+import { CarService } from './services/car.service';
 import { VehicleService } from './services/vehicle.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ import { CarsComponent } from './cars/cars.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CreateCarComponent } from './cars/create-car/create-car.component';
 import { HttpClientModule } from "@angular/common/http";
+import { ToastyModule } from "ng2-toasty";
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,13 +27,14 @@ import { HttpClientModule } from "@angular/common/http";
     NgbModule,
     FormsModule,
     HttpClientModule,
+    ToastyModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'cars', component: CarsComponent},
       {path: 'cars/create', component: CreateCarComponent}
     ])
   ],
-  providers: [VehicleService],
+  providers: [VehicleService, CarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,8 @@
+import { CarService } from './../../services/car.service';
 import { VehicleService } from './../../services/vehicle.service';
 import { Car } from './../../models/car';
 import { Component, OnInit } from '@angular/core';
+import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'app-create-car',
@@ -27,7 +29,7 @@ export class CreateCarComponent implements OnInit {
     engineSize:0
   }
 
-  constructor(private vehicleSevice: VehicleService) { }
+  constructor(private vehicleSevice: VehicleService, private carServise: CarService, private toastyService: ToastyService) { }
 
   ngOnInit() {
     this.vehicleSevice.getMakes().then(a=> {
@@ -46,4 +48,27 @@ export class CreateCarComponent implements OnInit {
     this.models = selectedMake ? selectedMake.models : [];
   }
 
+  submit() {
+    this.carServise.createCar(this.car)
+    .then(_=>  this.toastyService.success({
+      title: 'Success',
+      msg: 'Data was successfully saved.',
+      theme: 'bootstrap',
+      showClose: true,
+      timeout: 5000
+     }))
+    .catch(this.handleError);  
+  }
+
+  private handleError(error: any): Promise <any> {
+    let toast;
+    toast = {
+      type: 'info',
+      title: 'Failure',
+      body: 'Cannot submit data!',
+      showCloseButton: true
+    };
+    this.toastyService.error(toast);
+    return Promise.reject(error.message || error);
+}
 }

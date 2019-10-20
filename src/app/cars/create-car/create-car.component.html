@@ -1,7 +1,7 @@
 <h6>Create a car</h6>
 <div class="row">
     <div class="col-md-6">
-        <form #f="ngForm">
+        <form #f="ngForm" (ngSubmit) ="submit()">
             <div class="form-group">
                 <label for="make">Make</label>
                 <select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="car.makeId" name="makeId" required #make="ngModel">
@@ -34,9 +34,10 @@
 
             <div class="form-group">
                 <label for="transmissionType">Transmission type</label>
-                <select id="transmissionType" class="form-control" [(ngModel)]="car.transmissionTypeId" name="transmissionTypeId" required #transmissionType="ngModel">
+                <select id="transmissionType" class="form-control" [(ngModel)]="car.transmissionId" name="transmissionId" required #transmissionType="ngModel">
                     <option value=""></option>
-                    <option *ngFor="let t of transmissionTypes" value="{{t.id}}">{{t.name}}</option>
+                    <option value="1">Automatic</option>
+                    <option value="2">Manual</option>
                 </select>
                 <div class="alert alert-danger" *ngIf="transmissionType.touched && !transmissionType.valid">Please specify the transmission type</div>
             </div>
