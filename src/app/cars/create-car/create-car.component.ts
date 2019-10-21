@@ -2,7 +2,7 @@ import { CarService } from './../../services/car.service';
 import { VehicleService } from './../../services/vehicle.service';
 import { Car } from './../../models/car';
 import { Component, OnInit } from '@angular/core';
-import { ToastyService } from 'ng2-toasty';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-car',
@@ -29,13 +29,14 @@ export class CreateCarComponent implements OnInit {
     engineSize:0
   }
 
-  constructor(private vehicleSevice: VehicleService, private carServise: CarService, private toastyService: ToastyService) { }
+  constructor(private vehicleSevice: VehicleService, private carServise: CarService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.vehicleSevice.getMakes().then(a=> {
       this.results= a;
       this.makes = this.results;
-    })
+    }) .catch(_=> { this.toastrService.error('Error- cannot connect to the server.');        
+  }); 
   }
 
   onMakeChange(){
@@ -50,25 +51,7 @@ export class CreateCarComponent implements OnInit {
 
   submit() {
     this.carServise.createCar(this.car)
-    .then(_=>  this.toastyService.success({
-      title: 'Success',
-      msg: 'Data was successfully saved.',
-      theme: 'bootstrap',
-      showClose: true,
-      timeout: 5000
-     }))
-    .catch(this.handleError);  
+    .then(_=>  this.toastrService.success('Data has been saved successfully.'))
+    .catch(_=>  this.toastrService.error('Cannot save data.'));  
   }
-
-  private handleError(error: any): Promise <any> {
-    let toast;
-    toast = {
-      type: 'info',
-      title: 'Failure',
-      body: 'Cannot submit data!',
-      showCloseButton: true
-    };
-    this.toastyService.error(toast);
-    return Promise.reject(error.message || error);
-}
 }

@@ -11,8 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { CarsComponent } from './cars/cars.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CreateCarComponent } from './cars/create-car/create-car.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
-import { ToastyModule } from "ng2-toasty";
+import { ToastrModule } from "ngx-toastr";
+import { CustomFormsModule } from 'ngx-custom-validators';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,11 +25,13 @@ import { ToastyModule } from "ng2-toasty";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    CustomFormsModule,
     HttpClientModule,
-    ToastyModule.forRoot(),
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'cars', component: CarsComponent},

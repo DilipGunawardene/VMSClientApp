@@ -22,14 +22,20 @@
 
             <div class="form-group">
                 <label for="year">Year</label>
-                <input id="year" type="text" class="form-control" [(ngModel)]="car.year" name="year" required #year ="ngModel"/>
-                <div class="alert alert-danger" *ngIf ="year.touched && !year.valid">Please enter the year</div>
+                <input id="year" type="number" class="form-control" [(ngModel)]="car.year" name="year" required #year ="ngModel" [min]="1900"/>
+                <div class="alert alert-danger" *ngIf ="year.touched && !year.valid">
+                    <div *ngIf ="year.errors?.required" >Year is required.</div>
+                    <div *ngIf ="year.errors?.min">Year should be 1900 or higher</div>
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="price">Price</label>
-                <input id="price" type="text" class="form-control" [(ngModel)]="car.price" name="price" required #price="ngModel" />
-                <div class="alert alert-danger" *ngIf="price.touched && !price.valid">Please enter the price</div>
+                <input id="price" type="number" class="form-control" [(ngModel)]="car.price" name="price" required #price="ngModel" [min]="1"/>
+                <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+                    <div *ngIf="price.errors.required">Price is required.</div> 
+                    <div *ngIf="price.errors.min">Price should be greater than zero.</div>   
+                </div>
             </div>
 
             <div class="form-group">
@@ -44,20 +50,30 @@
 
             <div class="form-group">
                 <label for="engineSize">Engine size</label>
-                <input id="engineSize" type="text" class="form-control" [(ngModel)]="car.engineSize" name="engineSize" required #engineSize ="ngModel"/>
-                <div class="alert alert-danger" *ngIf ="engineSize.touched && !engineSize.valid">Please enter the engine size</div>
+                <input id="engineSize" type="number" class="form-control" [(ngModel)]="car.engineSize" name="engineSize" required #engineSize ="ngModel" [min]="1"/>
+                <div class="alert alert-danger" *ngIf="engineSize.touched && engineSize.invalid">
+                    <div *ngIf="engineSize.errors?.required">Engine size is required.</div> 
+                    <div *ngIf="engineSize.errors?.min">Engine size should be greater than zero.</div>   
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="noOfSeats">No of seats</label>
-                <input id="noOfSeats" type="text" class="form-control" [(ngModel)]="car.noOfSeats" name="noOfSeats" required #noOfSeats="ngModel" />
-                <div class="alert alert-danger" *ngIf="car.noOfSeats.touched && !car.noOfSeats.valid">Please enter the no of seats</div>
+                <input id="noOfSeats" type="number" class="form-control" [(ngModel)]="car.noOfSeats" name="noOfSeats" required #noOfSeats="ngModel" [min]="1"/>
+                <div class="alert alert-danger" *ngIf="noOfSeats.touched && noOfSeats.invalid">
+                    <div *ngIf="noOfSeats.errors?.required">No of seats is required.</div> 
+                    <div *ngIf="noOfSeats.errors?.min">No of seats should be greater than zero.</div>   
+                </div>
             </div>
 
            <div class="form-group">
                 <label for="noOfDoors">No of doors</label>
-                <input id="noOfDoors" type="text" class="form-control" [(ngModel)]="car.noOfDoors" name="noOfDoors" required #noOfDoors="ngModel" />
-                <div class="alert alert-danger" *ngIf="noOfDoors.touched && !noOfDoors.valid">Please enter no of doors</div>
+                <input id="noOfDoors" type="number" class="form-control" [(ngModel)]="car.noOfDoors" name="noOfDoors" required #noOfDoors="ngModel" [min]="1"/>
+                <div class="alert alert-danger" *ngIf="noOfDoors.touched && noOfDoors.invalid">
+                    <div *ngIf="noOfDoors.errors?.required">No of doors is required.</div> 
+                    <div *ngIf="noOfDoors.errors?.min">No of doors should be greater than zero.</div>   
+                </div>
+                
             </div> 
 
             <button class="btn btn-primary" [disabled]="!f.valid" >Save</button>

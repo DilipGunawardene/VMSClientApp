@@ -23,6 +23,7 @@ export class VehicleService {
              resolve(res);
            },
            msg=> {
+             console.log(msg);
              reject(msg);
            }
          )
